@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QKeyEvent>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -36,12 +38,12 @@ void MainWindow::moveRight()
 void MainWindow::moveUp()
 {
 
-    tempY=tempY+5;
+    tempY=tempY-5;
 }
 
 void MainWindow::moveDown()
 {
-    tempY=tempY-5;
+    tempY=tempY+5;
 }
 
 void MainWindow::moveLeft()
@@ -63,21 +65,15 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 void MainWindow::keyPressEvent(QKeyEvent *k)
 {
-    switch(tolower(k->ascii())){
-    case 'w':
+    auto key =  QString(k->text()).toLower();
+    if( key == "w")
         moveUp();
-        break;
-    case 's':
+    else if( key == "s")
         moveDown();
-        break;
-    case 'd':
+    else if( key == "d")
         moveRight();
-        break;
-    case 'a':
+    else if( key == "a")
         moveLeft();
-        break;
-    }
-
 
 }
 
